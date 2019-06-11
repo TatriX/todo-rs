@@ -40,7 +40,7 @@ fn main() -> io::Result<()> {
             }
             ["undo", id] => {
                 if let Some(id) = parse_id(id) {
-                    todo.mark_as_imcompleted(id);
+                    todo.mark_as_uncompleted(id);
                     todo.print();
                 }
             }

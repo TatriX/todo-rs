@@ -51,7 +51,7 @@ impl Todo {
         self.tasks.get_mut(id).map(|todo| todo.completed = true);
     }
 
-    pub fn mark_as_imcompleted(&mut self, id: Id) {
+    pub fn mark_as_uncompleted(&mut self, id: Id) {
         self.tasks.get_mut(id).map(|todo| todo.completed = false);
     }
 
