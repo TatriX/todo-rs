@@ -48,11 +48,15 @@ impl Todo {
     }
 
     pub fn mark_as_completed(&mut self, id: Id) {
-        self.tasks.get_mut(id).map(|todo| todo.completed = true);
+        if let Some(todo) = self.tasks.get_mut(id) {
+            todo.completed = true;
+        }
     }
 
     pub fn mark_as_uncompleted(&mut self, id: Id) {
-        self.tasks.get_mut(id).map(|todo| todo.completed = false);
+        if let Some(todo) = self.tasks.get_mut(id) {
+            todo.completed = false;
+        }
     }
 
     pub fn remove(&mut self, id: Id) {
@@ -68,7 +72,7 @@ impl fmt::Display for Todo {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         for (i, todo) in self.tasks.iter().enumerate() {
             let status = if todo.completed { " DONE" } else { "" };
-            write!(f, "{}){} {}\n", i + 1, status, todo.title)?;
+            writeln!(f, "{}){} {}", i + 1, status, todo.title)?;
         }
         write!(f, "Total: {}", self.tasks.len())
     }
