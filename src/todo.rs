@@ -15,6 +15,7 @@ pub struct Todo {
     tasks: Vec<Task>,
 }
 
+/// Index of the tasks list.
 pub type Id = usize;
 
 impl Todo {
@@ -71,8 +72,8 @@ impl Todo {
 impl fmt::Display for Todo {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         for (i, todo) in self.tasks.iter().enumerate() {
-            let status = if todo.completed { " DONE" } else { "" };
-            writeln!(f, "{}){} {}", i + 1, status, todo.title)?;
+            let status = if todo.completed { "[X]" } else { "[ ]" };
+            writeln!(f, "{}) {} {}", i + 1, status, todo.title)?;
         }
         write!(f, "Total: {}", self.tasks.len())
     }
